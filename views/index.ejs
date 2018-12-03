@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>前端 koa 框架 Mall || <%= title %></title>
+</head>
+<body>
+
+<div id="root">
+    <% if(id != null) { %>
+    <h3>登录用户ID：<%= id.a %>
+        <button style="color: blue;" @click="handelLogoutClick">安全退出</button>
+    </h3>
+    <% } %>
+
+    <a href="/sendSocket"> 发推送消息</a>
+    <a href="/receiveSocket"> 接收推送消息</a>
+    <a href="/receiveSocketTow"> 接收推送消息2</a>
+</div>
+
+</body>
+</html>
+
+<script src="/javascripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="/javascripts/vue.js"></script>
+<script>
+    new Vue({
+        el: "#root",
+        methods: {
+            handelLogoutClick: function () {
+                $.ajax({
+                    url: "/users/logout",
+                    type: "POST",
+                    success: function (data) {
+                        if (data.code === 1) {
+                            window.location.href = "/loginPage"
+                        }
+                    }
+                })
+            }
+        }
+    })
+</script>
